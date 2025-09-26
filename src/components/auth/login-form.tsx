@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { signInWithGoogle, signInWithEmail } from '@/lib/firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 48 48" {...props}>
@@ -23,6 +24,7 @@ export function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { toast } = useToast();
 
   const handleGoogleSignIn = async () => {
     const user = await signInWithGoogle();
@@ -32,6 +34,14 @@ export function LoginForm() {
   };
 
   const handleEmailSignIn = async () => {
+    if (!email || !password) {
+      toast({
+        title: 'Login Failed',
+        description: 'Please enter both email and password.',
+        variant: 'destructive',
+      });
+      return;
+    }
     const user = await signInWithEmail(email, password);
     if (user) {
       router.push('/dashboard');
