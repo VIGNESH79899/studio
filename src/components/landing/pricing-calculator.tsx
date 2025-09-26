@@ -10,11 +10,22 @@ import Link from 'next/link';
 
 const BASE_PRICE = 1499;
 const PRICE_PER_ADDITIONAL_ITEM = 500;
+const BASE_GRAMS = 100;
+const PRICE_PER_ADDITIONAL_100G = 250;
 
 export default function PricingCalculator() {
   const [itemsPerDay, setItemsPerDay] = useState(1);
+  const [gramsPerItem, setGramsPerItem] = useState(200);
 
-  const monthlyPrice = BASE_PRICE + (itemsPerDay - 1) * PRICE_PER_ADDITIONAL_ITEM;
+  const calculatePrice = () => {
+    const itemPrice = BASE_PRICE + (itemsPerDay - 1) * PRICE_PER_ADDITIONAL_ITEM;
+    const weightMultiplier = (gramsPerItem - BASE_GRAMS) / 100;
+    const weightPrice = weightMultiplier * PRICE_PER_ADDITIONAL_100G * itemsPerDay;
+    return itemPrice + weightPrice;
+  };
+
+  const monthlyPrice = calculatePrice();
+
 
   return (
     <section id="pricing" className="py-16 sm:py-24">
@@ -22,7 +33,7 @@ export default function PricingCalculator() {
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">Flexible Plans for Everyone</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Adjust the slider to find the perfect plan for your household. No commitments, cancel anytime.
+            Adjust the sliders to find the perfect plan for your household. No commitments, cancel anytime.
           </p>
         </div>
         <div className="max-w-2xl mx-auto">
@@ -32,20 +43,35 @@ export default function PricingCalculator() {
                 <BaggageClaim className="h-8 w-8 text-primary" />
               </div>
               <CardTitle className="font-headline text-2xl">Your Custom Box</CardTitle>
-              <CardDescription>Select how many items you want per day.</CardDescription>
+              <CardDescription>Select how many items and the weight you want per day.</CardDescription>
             </CardHeader>
-            <CardContent className="py-8">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-muted-foreground">Items per day:</span>
-                <span className="font-bold text-2xl text-primary">{itemsPerDay}</span>
+            <CardContent className="py-8 grid gap-8">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-muted-foreground">Items per day:</span>
+                  <span className="font-bold text-2xl text-primary">{itemsPerDay}</span>
+                </div>
+                <Slider
+                  value={[itemsPerDay]}
+                  onValueChange={(value) => setItemsPerDay(value[0])}
+                  min={1}
+                  max={10}
+                  step={1}
+                />
               </div>
-              <Slider
-                value={[itemsPerDay]}
-                onValueChange={(value) => setItemsPerDay(value[0])}
-                min={1}
-                max={10}
-                step={1}
-              />
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-muted-foreground">Grams per item:</span>
+                  <span className="font-bold text-2xl text-primary">{gramsPerItem}g</span>
+                </div>
+                <Slider
+                  value={[gramsPerItem]}
+                  onValueChange={(value) => setGramsPerItem(value[0])}
+                  min={100}
+                  max={1000}
+                  step={100}
+                />
+              </div>
             </CardContent>
             <CardFooter className="flex flex-col items-center gap-4 bg-muted/50 p-6">
               <div className="text-center">
