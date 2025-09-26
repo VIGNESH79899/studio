@@ -33,7 +33,7 @@ export default function Features() {
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose Us?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Experience the difference with FreshHarvest Direct.
+            Experience the difference with Fresh Harvest.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">

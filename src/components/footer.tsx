@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <Logo />
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} FreshHarvest Direct. All rights reserved.
+            © {new Date().getFullYear()} Fresh Harvest. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-muted-foreground hover:text-foreground">

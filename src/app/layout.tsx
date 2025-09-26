@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/contexts/auth-context';
 
 export const metadata: Metadata = {
-  title: 'FreshHarvest Direct',
+  title: 'Fresh Harvest',
   description: 'Subscription-based fruit & vegetable delivery service',
 };
 
