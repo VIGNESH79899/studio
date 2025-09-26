@@ -1,13 +1,19 @@
+
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "@/contexts/auth-context";
 import { Package, Calendar, User, Edit } from "lucide-react";
 
 export default function DashboardPage() {
+  const { user } = useAuth();
+
   return (
     <div className="container py-8 sm:py-12">
       <div className="mb-8">
         <h1 className="font-headline text-3xl font-bold md:text-4xl">Your Dashboard</h1>
-        <p className="mt-2 text-lg text-muted-foreground">Welcome back, User!</p>
+        <p className="mt-2 text-lg text-muted-foreground">Welcome back, {user?.displayName ?? 'User'}!</p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -49,8 +55,8 @@ export default function DashboardPage() {
             <User className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-xl font-bold">John Doe</div>
-            <p className="text-xs text-muted-foreground">john.doe@example.com</p>
+            <div className="text-xl font-bold">{user?.displayName ?? 'John Doe'}</div>
+            <p className="text-xs text-muted-foreground">{user?.email ?? 'john.doe@example.com'}</p>
           </CardContent>
           <CardFooter>
              <Button variant="outline" className="w-full">

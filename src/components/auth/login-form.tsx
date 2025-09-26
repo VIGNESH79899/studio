@@ -1,10 +1,13 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { signInWithGoogle } from '@/lib/firebase/auth';
+import { useRouter } from 'next/navigation';
 
 const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 48 48" {...props}>
@@ -16,6 +19,14 @@ const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   );
 
 export function LoginForm() {
+  const router = useRouter();
+  const handleGoogleSignIn = async () => {
+    const user = await signInWithGoogle();
+    if (user) {
+      router.push('/dashboard');
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="space-y-1 text-center">
@@ -23,7 +34,7 @@ export function LoginForm() {
         <CardDescription>Enter your email below to login to your account</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full" onClick={handleGoogleSignIn}>
           <GoogleIcon className="mr-2 h-4 w-4" />
           Sign in with Google
         </Button>
@@ -37,15 +48,15 @@ export function LoginForm() {
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" />
+          <Input id="email" type="email" placeholder="m@example.com" disabled />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" />
+          <Input id="password" type="password" disabled />
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
-        <Button className="w-full">Sign In</Button>
+        <Button className="w-full" disabled>Sign In</Button>
         <p className="text-sm text-center text-muted-foreground">
             Don&apos;t have an account?{' '}
             <Link href="/signup" className="font-medium text-primary hover:underline">
