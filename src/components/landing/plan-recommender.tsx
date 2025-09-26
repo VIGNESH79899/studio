@@ -1,7 +1,7 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
 import { useActionState, useEffect, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { ArrowRight, Loader2, Wand2 } from 'lucide-react';
 
 import { getPlanRecommendation, type RecommendationState } from '@/app/actions';
