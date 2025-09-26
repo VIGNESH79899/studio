@@ -8,13 +8,13 @@ import { Slider } from '@/components/ui/slider';
 import { BaggageClaim } from 'lucide-react';
 import Link from 'next/link';
 
-const PRICE_PER_ITEM = 200;
-const DAYS_IN_MONTH = 30;
+const BASE_PRICE = 1499;
+const PRICE_PER_ADDITIONAL_ITEM = 500;
 
 export default function PricingCalculator() {
-  const [itemsPerDay, setItemsPerDay] = useState(5);
+  const [itemsPerDay, setItemsPerDay] = useState(1);
 
-  const monthlyPrice = itemsPerDay * PRICE_PER_ITEM * DAYS_IN_MONTH;
+  const monthlyPrice = BASE_PRICE + (itemsPerDay - 1) * PRICE_PER_ADDITIONAL_ITEM;
 
   return (
     <section id="pricing" className="py-16 sm:py-24">
