@@ -14,7 +14,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 const navLinks = [
   { href: '/#features', label: 'Features' },
   { href: '/#pricing', label: 'Pricing' },
-  { href: '/#recommender', label: 'Find Your Plan' },
 ];
 
 export default function Header() {

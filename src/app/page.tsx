@@ -1,8 +1,8 @@
 import Header from '@/components/header';
 import Hero from '@/components/landing/hero';
 import Features from '@/components/landing/features';
-import PricingCalculator from '@/components/landing/pricing-calculator';
 import Footer from '@/components/footer';
+import PricingCalculator from '@/components/landing/pricing-calculator';
 
 export default function Home() {
   return (
