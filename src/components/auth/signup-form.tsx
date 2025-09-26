@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { signInWithGoogle } from '@/lib/firebase/auth';
+import { signInWithGoogle, signUpWithEmail } from '@/lib/firebase/auth';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 48 48" {...props}>
@@ -20,12 +21,23 @@ const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function SignupForm() {
     const router = useRouter();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const handleGoogleSignIn = async () => {
       const user = await signInWithGoogle();
       if (user) {
         router.push('/dashboard');
       }
     };
+
+    const handleEmailSignUp = async () => {
+        const user = await signUpWithEmail(name, email, password);
+        if (user) {
+            router.push('/dashboard');
+        }
+    }
 
   return (
     <Card className="w-full">
@@ -48,19 +60,19 @@ export function SignupForm() {
         </div>
         <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="John Doe" />
+            <Input id="name" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" />
+          <Input id="email" type="email" placeholder="m@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" />
+          <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
-        <Button className="w-full">Create Account</Button>
+        <Button className="w-full" onClick={handleEmailSignUp}>Create Account</Button>
         <p className="text-sm text-center text-muted-foreground">
             Already have an account?{' '}
             <Link href="/login" className="font-medium text-primary hover:underline">
