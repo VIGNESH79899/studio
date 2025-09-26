@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +8,7 @@ import { Slider } from '@/components/ui/slider';
 import { BaggageClaim } from 'lucide-react';
 import Link from 'next/link';
 
-const PRICE_PER_ITEM = 2.5;
+const PRICE_PER_ITEM = 200;
 const DAYS_IN_MONTH = 30;
 
 export default function PricingCalculator() {
@@ -50,7 +51,7 @@ export default function PricingCalculator() {
               <div className="text-center">
                 <p className="text-muted-foreground">Monthly Price</p>
                 <p className="font-headline text-4xl font-bold">
-                  ${monthlyPrice.toFixed(2)}
+                  ₹{monthlyPrice.toFixed(2)}
                 </p>
               </div>
               <Button size="lg" className="w-full" asChild>
