@@ -2,7 +2,6 @@ import Header from '@/components/header';
 import Hero from '@/components/landing/hero';
 import Features from '@/components/landing/features';
 import PricingCalculator from '@/components/landing/pricing-calculator';
-import PlanRecommender from '@/components/landing/plan-recommender';
 import Footer from '@/components/footer';
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
         <Hero />
         <Features />
         <PricingCalculator />
-        <PlanRecommender />
       </main>
       <Footer />
     </div>
