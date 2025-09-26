@@ -48,19 +48,19 @@ export function SignupForm() {
         </div>
         <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="John Doe" disabled />
+            <Input id="name" placeholder="John Doe" />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" disabled/>
+          <Input id="email" type="email" placeholder="m@example.com" />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" disabled/>
+          <Input id="password" type="password" />
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
-        <Button className="w-full" disabled>Create Account</Button>
+        <Button className="w-full">Create Account</Button>
         <p className="text-sm text-center text-muted-foreground">
             Already have an account?{' '}
             <Link href="/login" className="font-medium text-primary hover:underline">
