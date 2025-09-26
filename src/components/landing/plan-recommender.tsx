@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-import { useEffect, useState, useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { ArrowRight, Loader2, Wand2 } from 'lucide-react';
 
 import { getPlanRecommendation, type RecommendationState } from '@/app/actions';
@@ -37,7 +37,7 @@ function SubmitButton() {
 }
 
 export default function PlanRecommender() {
-  const [state, dispatch] = useActionState(getPlanRecommendation, initialState);
+  const [state, formAction] = useActionState(getPlanRecommendation, initialState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function PlanRecommender() {
         </div>
 
         <div className="max-w-2xl mx-auto">
-          <form action={dispatch}>
+          <form action={formAction}>
             <Card className="shadow-lg">
               <CardHeader>
                 <div className="flex items-center gap-4">
