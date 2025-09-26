@@ -1,7 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { useEffect, useState } from 'react';
+import { useFormStatus } from 'react-dom';
+import { useEffect, useState, useActionState } from 'react';
 import { ArrowRight, Loader2, Wand2 } from 'lucide-react';
 
 import { getPlanRecommendation, type RecommendationState } from '@/app/actions';
@@ -37,7 +37,7 @@ function SubmitButton() {
 }
 
 export default function PlanRecommender() {
-  const [state, dispatch] = useFormState(getPlanRecommendation, initialState);
+  const [state, dispatch] = useActionState(getPlanRecommendation, initialState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
